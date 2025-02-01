@@ -54,7 +54,7 @@ public class ProductManagementControllerTests : IDisposable
         var request = new CreateProductDto
         {
             Name = "Test Product",
-            Price = 99.99m
+            Price = 99.99
         };
 
         // Act

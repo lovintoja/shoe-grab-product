@@ -3,11 +3,15 @@ using Microsoft.OpenApi.Models;
 using ShoeGrabMonolith.Database.Mappers;
 using ShoeGrabProductManagement.Contexts;
 using ShoeGrabProductManagement.Extensions;
+using ShoeGrabProductManagement.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Controllers
 builder.Services.AddControllers();
+
+builder.Services.AddGrpc();
+builder.Services.AddAutoMapper(typeof(GrpcMappingProfile));
 
 //Swagger
 builder.Services.AddSwaggerGen(c =>
