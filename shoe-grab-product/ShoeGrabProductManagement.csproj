@@ -32,5 +32,9 @@
   <ItemGroup>
     <ProjectReference Include="..\shoe-grab-common\shoe-grab-common-lib\ShoeGrabCommonModels.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Protobuf Include="../shoe-grab-common/shoe-grab-protos/*.proto" GrpcServices="Both" ProtoRoot="../shoe-grab-common/shoe-grab-protos" />
+  </ItemGroup>
 
 </Project>
