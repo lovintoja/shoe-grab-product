@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using ShoeGrabMonolith.Database.Mappers;
 using ShoeGrabProductManagement.Contexts;
 using ShoeGrabProductManagement.Extensions;
+using ShoeGrabProductManagement.Grpc;
 using ShoeGrabProductManagement.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +64,8 @@ var app = builder.Build();
 
 //Migrations
 app.ApplyMigrations();
+
+app.MapGrpcService<ProductManagementService>();
 
 //Security
 app.UseAuthentication();
