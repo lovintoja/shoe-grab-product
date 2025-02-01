@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabProductManagement", "shoe-grab-product\ShoeGrabProductManagement.csproj", "{578A25AB-7670-4194-9D6D-17E6C0868135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabProductManagement", "ShoeGrabProductManagement.csproj", "{578A25AB-7670-4194-9D6D-17E6C0868135}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabCommonModels", "shoe-grab-product\Common\shoe-grab-common-lib\ShoeGrabCommonModels.csproj", "{7C28CE4C-9A23-4168-8548-C661F6EC3131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabCommonModels", "Common\shoe-grab-common-lib\ShoeGrabCommonModels.csproj", "{7C28CE4C-9A23-4168-8548-C661F6EC3131}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{3B96622B-91F1-4C7B-98AF-AC417EDB331E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabProductManagementTests", "shoe-grab-tests\ShoeGrabProductManagementTests.csproj", "{5737E045-67AF-40D8-A03C-CDA9CB6212C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabProductManagementTests", "..\shoe-grab-tests\ShoeGrabProductManagementTests.csproj", "{5737E045-67AF-40D8-A03C-CDA9CB6212C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
