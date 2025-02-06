@@ -8,6 +8,8 @@ using ShoeGrabProductManagement.Mappers;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Net;
+using ShoeGrabProductManagement;
+using ShoeGrabProductManagement.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +64,17 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
 
@@ -89,6 +102,7 @@ app.MapGrpcService<ProductManagementService>();
 //Security
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("AllowAllOrigins");
 
 //Swagger
 if (app.Environment.IsDevelopment())
@@ -96,8 +110,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 
