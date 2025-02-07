@@ -8,60 +8,30 @@ using ShoeGrabProductManagement.Mappers;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Net;
+using ShoeGrabProductManagement;
+using ShoeGrabProductManagement.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Controllers
 builder.Services.AddControllers();
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.Listen(IPAddress.Any, 7123, listenOptions =>
-    {
-        listenOptions.Protocols = HttpProtocols.Http2;
-        listenOptions.UseHttps("Resources\\server.pfx", "test123", httpsOptions =>
-        {
-            httpsOptions.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-        });
-    });
-    options.Listen(IPAddress.Any, 5137, listenOptions =>
-    {
-        listenOptions.Protocols = HttpProtocols.Http1;
-    });
-});
+builder.SetupKestrel();
 
 builder.Services.AddGrpc();
 builder.Services.AddAutoMapper(typeof(GrpcMappingProfile));
 
-//Swagger
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddCors(options =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
-
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    options.AddPolicy("AllowAllOrigins", policy =>
     {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer"
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
 
@@ -93,11 +63,8 @@ app.UseAuthorization();
 //Swagger
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseCors("AllowAllOrigins");
 }
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 

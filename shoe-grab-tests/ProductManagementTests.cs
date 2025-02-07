@@ -29,17 +29,16 @@ public class ProductManagementControllerTests : IDisposable
 
     private void SetupDefaultMappings()
     {
-        _mockMapper.Setup(m => m.Map<Product>(It.IsAny<CreateProductDto>()))
+        _mockMapper.Setup(m => m.Map<Product>(It.IsAny<ProductDto>()))
             .Returns((CreateProductDto dto) => new Product
             {
                 Name = dto.Name,
                 Price = dto.Price
             });
 
-        _mockMapper.Setup(m => m.Map<ProductResponseDto>(It.IsAny<Product>()))
-            .Returns((Product p) => new ProductResponseDto
+        _mockMapper.Setup(m => m.Map<ProductDto>(It.IsAny<Product>()))
+            .Returns((Product p) => new ProductDto
             {
-                Id = p.Id,
                 Name = p.Name,
                 Price = p.Price
             });
@@ -51,7 +50,7 @@ public class ProductManagementControllerTests : IDisposable
     public async Task AddProduct_ValidRequest_ReturnsCreatedProduct()
     {
         // Arrange
-        var request = new CreateProductDto
+        var request = new ProductDto
         {
             Name = "Test Product",
             Price = 99.99
@@ -62,7 +61,7 @@ public class ProductManagementControllerTests : IDisposable
 
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var response = Assert.IsType<ProductResponseDto>(okResult.Value);
+        var response = Assert.IsType<ProductDto>(okResult.Value);
 
         Assert.Equal(request.Name, response.Name);
         Assert.Equal(request.Price, response.Price);
@@ -72,13 +71,14 @@ public class ProductManagementControllerTests : IDisposable
     public async Task UpdateProduct_NonExistingProduct_ReturnsNotFound()
     {
         // Arrange
-        var updateDto = new UpdateProductDto
+        var updateDto = new ProductDto
         {
+            Id = 999,
             Name = "New Name"
         };
 
         // Act
-        var result = await _controller.UpdateProduct(999, updateDto);
+        var result = await _controller.UpdateProduct(updateDto);
 
         // Assert
         Assert.IsType<NotFoundResult>(result.Result);
