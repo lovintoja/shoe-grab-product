@@ -21,7 +21,6 @@ namespace ShoeGrabProductManagement.Controllers
             _mapper = mapper;
         }
 
-        // Get all products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
@@ -30,7 +29,6 @@ namespace ShoeGrabProductManagement.Controllers
             return Ok(productDtos);
         }
 
-        // Get product by id
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {

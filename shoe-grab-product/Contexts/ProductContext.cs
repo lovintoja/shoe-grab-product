@@ -27,7 +27,6 @@ public class ProductContext : DbContext
             .WithOne(bi => bi.Basket) 
             .HasForeignKey(bi => bi.BasketId); 
 
-        // BasketItem Entity Configuration
         modelBuilder.Entity<BasketItem>()
             .HasKey(bi => bi.Id); 
 

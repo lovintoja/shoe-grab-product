@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoeGrabCommonModels;
 using ShoeGrabProductManagement.Dto;
-using ShoeGrabProductManagement.Extensions;
 using System.Security.Claims;
 
 
