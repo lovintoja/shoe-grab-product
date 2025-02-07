@@ -1,0 +1,6 @@
+@ShoeGrabProductManagement_HostAddress = http://localhost:5137
+
+GET {{ShoeGrabProductManagement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
