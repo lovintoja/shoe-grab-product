@@ -10,5 +10,5 @@ public class CreateProductDto
 
     [Required]
     [Range(0.01, double.MaxValue)]
-    public decimal Price { get; set; }
+    public double Price { get; set; }
 }
