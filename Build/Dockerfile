@@ -13,4 +13,4 @@ COPY --from=build /out .
 EXPOSE 10021
 EXPOSE 10022
 ENV DB_CONNECTION_STRING="Host=192.168.0.121;Port=30002;Database=db2;Username=admin;Password=admin"
-ENTRYPOINT ["dotnet", "shoe-grab-product.dll"]
+ENTRYPOINT ["dotnet", "ShoeGrabProductManagement.dll"]
