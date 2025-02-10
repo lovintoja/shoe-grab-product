@@ -64,7 +64,7 @@ public class ProductManagementService : ProductManagement.ProductManagementBase
     {
         try
         {
-            var product = _mapper.Map<Product>(request);
+            var product = _mapper.Map<Product>(request.Product);
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
             return new AddProductResponse { Success = true };
