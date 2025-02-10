@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabCommonModels", "sho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{3B96622B-91F1-4C7B-98AF-AC417EDB331E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeGrabProductManagementTests", "shoe-grab-tests\ShoeGrabProductManagementTests.csproj", "{5737E045-67AF-40D8-A03C-CDA9CB6212C3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,10 +23,6 @@ Global
 		{7C28CE4C-9A23-4168-8548-C661F6EC3131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C28CE4C-9A23-4168-8548-C661F6EC3131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C28CE4C-9A23-4168-8548-C661F6EC3131}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5737E045-67AF-40D8-A03C-CDA9CB6212C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5737E045-67AF-40D8-A03C-CDA9CB6212C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5737E045-67AF-40D8-A03C-CDA9CB6212C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5737E045-67AF-40D8-A03C-CDA9CB6212C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
