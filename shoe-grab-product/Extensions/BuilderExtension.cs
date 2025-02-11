@@ -62,7 +62,7 @@ public static class BuilderExtension
             var grpcEndpoint = kestrelSection.GetSection("Grpc");
             if (grpcEndpoint.Exists())
             {
-                var grpcUrl = new Uri(grpcEndpoint["Url"]);
+                var grpcUrl = new Uri(Environment.GetEnvironmentVariable("PRODUCT_GRPC_URI"));
                 options.Listen(IPAddress.Parse(grpcUrl.Host), grpcUrl.Port, listenOptions =>
                 {
                     listenOptions.Protocols = Enum.Parse<HttpProtocols>(grpcEndpoint["Protocols"]);
@@ -85,7 +85,7 @@ public static class BuilderExtension
             var restApiEndpoint = kestrelSection.GetSection("RestApi");
             if (restApiEndpoint.Exists())
             {
-                var restApiUrl = new Uri(restApiEndpoint["Url"]);
+                var restApiUrl = new Uri(Environment.GetEnvironmentVariable("PRODUCT_REST_URI"));
                 options.Listen(IPAddress.Parse(restApiUrl.Host), restApiUrl.Port, listenOptions =>
                 {
                     listenOptions.Protocols = Enum.Parse<HttpProtocols>(restApiEndpoint["Protocols"]);
