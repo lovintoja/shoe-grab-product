@@ -71,11 +71,7 @@ app.MapGrpcService<ProductManagementService>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//Swagger
-if (app.Environment.IsDevelopment())
-{
-    app.UseCors("AllowAllOrigins");
-}
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 
