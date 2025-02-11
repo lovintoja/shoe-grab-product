@@ -33,7 +33,10 @@ public class BasketService : IBasketService
 
     public async Task<Basket?> GetBasket(int userId)
     {
-        return await _productContext.Baskets.FirstOrDefaultAsync(b => b.UserId == userId);
+        return await _productContext.Baskets
+            .Include(b => b.Items)
+            .ThenInclude(bi => bi.Product)
+            .FirstOrDefaultAsync(b => b.UserId == userId);
     }
 
     public async Task<bool> RemoveBasket(int userId)
@@ -66,7 +69,10 @@ public class BasketService : IBasketService
                 throw new ArgumentNullException(nameof(updatedBasket), "Updated basket cannot be null.");
             }
 
-            var existingBasket = await _productContext.Baskets.FirstOrDefaultAsync(b => b.UserId == userId);
+            var existingBasket = await _productContext.Baskets
+                .Include(b => b.Items)
+                .ThenInclude(bi => bi.Product)
+                .FirstOrDefaultAsync(b => b.UserId == userId);
 
             if (existingBasket == null)
             {
