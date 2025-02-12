@@ -30,7 +30,6 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddGrpc();
-builder.Services.AddAutoMapper(typeof(GrpcMappingProfile));
 
 builder.Services.AddScoped<IBasketService, BasketService>();
 
@@ -61,6 +60,8 @@ builder.Services.AddAuthorization();
 builder.AddJWTAuthenticationAndAuthorization();
 
 // Add AutoMapper with all profiles in the assembly
+builder.Services.AddAutoMapper(typeof(GrpcMappingProfile));
+builder.Services.AddAutoMapper(typeof(BasketMappingProfile));
 builder.Services.AddAutoMapper(typeof(ProductMappingProfile).Assembly);
 ////APP PART////
 var app = builder.Build();
