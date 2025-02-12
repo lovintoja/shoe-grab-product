@@ -59,6 +59,16 @@ public static class BuilderExtension
         {
             var kestrelSection = context.Configuration.GetSection("Kestrel:Endpoints");
 
+            var grpcEndpoint = kestrelSection.GetSection("Grpc");
+            if (grpcEndpoint.Exists())
+            {
+                var grpcUrl = new Uri(Environment.GetEnvironmentVariable("PRODUCT_GRPC_URI"));
+                options.Listen(IPAddress.Parse(grpcUrl.Host), grpcUrl.Port, listenOptions =>
+                {
+                    listenOptions.Protocols = Enum.Parse<HttpProtocols>(HttpProtocol.Http2);
+                });
+            }
+
             var restApiEndpoint = kestrelSection.GetSection("RestApi");
             if (restApiEndpoint.Exists())
             {
