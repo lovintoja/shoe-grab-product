@@ -18,10 +18,6 @@ builder.Services.AddControllers();
 
 builder.SetupKestrel();
 
-builder.Services.AddGrpc();
-builder.Services.AddAutoMapper(typeof(GrpcMappingProfile));
-
-builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
@@ -31,6 +27,12 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+builder.Services.AddGrpc();
+builder.Services.AddAutoMapper(typeof(GrpcMappingProfile));
+
+builder.Services.AddScoped<IBasketService, BasketService>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
@@ -68,10 +70,10 @@ app.ApplyMigrations();
 app.MapGrpcService<ProductManagementService>();
 
 //Security
+app.UseCors("AllowAllOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 
