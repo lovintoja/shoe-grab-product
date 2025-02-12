@@ -22,9 +22,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.AllowCredentials()
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .SetIsOriginAllowed(host => true);
     });
 });
 
