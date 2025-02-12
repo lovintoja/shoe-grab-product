@@ -59,29 +59,6 @@ public static class BuilderExtension
         {
             var kestrelSection = context.Configuration.GetSection("Kestrel:Endpoints");
 
-            var grpcEndpoint = kestrelSection.GetSection("Grpc");
-            if (grpcEndpoint.Exists())
-            {
-                var grpcUrl = new Uri(Environment.GetEnvironmentVariable("PRODUCT_GRPC_URI"));
-                options.Listen(IPAddress.Parse(grpcUrl.Host), grpcUrl.Port, listenOptions =>
-                {
-                    listenOptions.Protocols = Enum.Parse<HttpProtocols>(grpcEndpoint["Protocols"]);
-                    listenOptions.UseHttps(httpsOptions =>
-                    {
-                        var certificatePath = grpcEndpoint["Certificate:Path"];
-                        var certificatePassword = grpcEndpoint["Certificate:Password"];
-                        var parseSuccess = Enum.TryParse(grpcEndpoint["Certificate:ClientCertificateMode"], out ClientCertificateMode clientCertificateMode);
-
-                        if (certificatePath != null && certificatePassword != null && parseSuccess)
-                        {
-                            var certificate = new X509Certificate2(certificatePath, certificatePassword);
-                            httpsOptions.ServerCertificate = certificate;
-                            httpsOptions.ClientCertificateMode = clientCertificateMode;
-                        }
-                    });
-                });
-            }
-
             var restApiEndpoint = kestrelSection.GetSection("RestApi");
             if (restApiEndpoint.Exists())
             {
