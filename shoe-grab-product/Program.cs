@@ -67,10 +67,11 @@ var app = builder.Build();
 //Migrations
 app.ApplyMigrations();
 
+app.UseCors("AllowAllOrigins");
+
 app.MapGrpcService<ProductManagementService>();
 
 //Security
-app.UseCors("AllowAllOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
 
