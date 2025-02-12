@@ -7,6 +7,7 @@ public class GrpcMappingProfile : Profile
 {
     public GrpcMappingProfile()
     {
+        CreateMap<ProductProto, Product>();
         CreateMap<Product, ProductProto>();
     }
 }
